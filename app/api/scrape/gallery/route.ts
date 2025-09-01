@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import * as cheerio from "cheerio";
+import type { Element } from "domhandler";
 
 export async function GET() {
   try {
