@@ -38,7 +38,7 @@ export async function GET() {
     }> = [];
 
     // Look for images in various selectors that might contain gallery images
-    $("img").each((index: number, element: cheerio.CheerioElement) => {
+    $("img").each((index: number, element: Element) => {
       const $img = $(element);
       const src = $img.attr("src");
       const alt = $img.attr("alt") || "";
@@ -128,71 +128,67 @@ export async function GET() {
     });
 
     // Also look for background images in CSS
-    $('[style*="background"]').each(
-      (index: number, element: cheerio.CheerioElement) => {
-        const $el = $(element);
-        const style = $el.attr("style") || "";
-        const backgroundMatch = style.match(
-          /background(?:-image)?:\s*url\(['"]?([^'")\s]+)['"]?\)/i
-        );
+    $('[style*="background"]').each((index: number, element: Element) => {
+      const $el = $(element);
+      const style = $el.attr("style") || "";
+      const backgroundMatch = style.match(
+        /background(?:-image)?:\s*url\(['"]?([^'")\s]+)['"]?\)/i
+      );
 
-        if (backgroundMatch) {
-          const src = backgroundMatch[1];
+      if (backgroundMatch) {
+        const src = backgroundMatch[1];
+        if (
+          src &&
+          !src.startsWith("data:") &&
+          !src.includes("logo") &&
+          !src.includes("icon")
+        ) {
+          const absoluteSrc = src.startsWith("http")
+            ? src
+            : `https://adigitalhome.com${src.startsWith("/") ? "" : "/"}${src}`;
+
+          // Determine category based on element context
+          let category = "general";
+          const elementText = $el.text().toLowerCase();
+          const parentText = $el.parent().text().toLowerCase();
+
           if (
-            src &&
-            !src.startsWith("data:") &&
-            !src.includes("logo") &&
-            !src.includes("icon")
+            elementText.includes("residential") ||
+            parentText.includes("residential")
           ) {
-            const absoluteSrc = src.startsWith("http")
-              ? src
-              : `https://adigitalhome.com${
-                  src.startsWith("/") ? "" : "/"
-                }${src}`;
-
-            // Determine category based on element context
-            let category = "general";
-            const elementText = $el.text().toLowerCase();
-            const parentText = $el.parent().text().toLowerCase();
-
-            if (
-              elementText.includes("residential") ||
-              parentText.includes("residential")
-            ) {
-              category = "residential";
-            } else if (
-              elementText.includes("commercial") ||
-              parentText.includes("commercial")
-            ) {
-              category = "commercial";
-            } else if (
-              elementText.includes("lighting") ||
-              elementText.includes("shade")
-            ) {
-              category = "lighting";
-            } else if (
-              elementText.includes("audio") ||
-              elementText.includes("video") ||
-              elementText.includes("theater")
-            ) {
-              category = "audio-video";
-            } else if (
-              elementText.includes("security") ||
-              elementText.includes("camera")
-            ) {
-              category = "security";
-            }
-
-            images.push({
-              src: absoluteSrc,
-              alt: "",
-              title: "",
-              category,
-            });
+            category = "residential";
+          } else if (
+            elementText.includes("commercial") ||
+            parentText.includes("commercial")
+          ) {
+            category = "commercial";
+          } else if (
+            elementText.includes("lighting") ||
+            elementText.includes("shade")
+          ) {
+            category = "lighting";
+          } else if (
+            elementText.includes("audio") ||
+            elementText.includes("video") ||
+            elementText.includes("theater")
+          ) {
+            category = "audio-video";
+          } else if (
+            elementText.includes("security") ||
+            elementText.includes("camera")
+          ) {
+            category = "security";
           }
+
+          images.push({
+            src: absoluteSrc,
+            alt: "",
+            title: "",
+            category,
+          });
         }
       }
-    );
+    });
 
     // Filter out duplicates and low-quality images
     const uniqueImages = images
