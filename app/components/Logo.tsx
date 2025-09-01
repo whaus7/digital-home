@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface LogoProps {
   className?: string;
@@ -8,9 +9,11 @@ interface LogoProps {
 export default function Logo({ className = "", showLink = true }: LogoProps) {
   const logoContent = (
     <div className={`flex items-center space-x-3 ${className}`}>
-      <img
+      <Image
         src="/DW-Logo.webp"
         alt="Digital Home Technologies Logo"
+        width={44}
+        height={44}
         className="h-11 w-auto"
       />
       <div className="flex flex-col">

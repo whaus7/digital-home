@@ -9,8 +9,8 @@ export default function Partners() {
             Trusted by Industry Leaders
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We partner with the world's leading technology brands to deliver
-            exceptional smart home solutions and premium audio-visual
+            We partner with the world&apos;s leading technology brands to
+            deliver exceptional smart home solutions and premium audio-visual
             experiences.
           </p>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -294,7 +294,7 @@ export default function Hero({
     null
   ); // Start with null to prevent initial render
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [panDirection, setPanDirection] = useState({ x: 0, y: 0 });
+
   const [currentPanPosition, setCurrentPanPosition] = useState({ x: 0, y: 0 });
   const [nextImageIndex, setNextImageIndex] = useState<number | null>(null);
   const currentImageIndexRef = useRef(0); // Ref to track current index for interval
@@ -312,7 +312,6 @@ export default function Hero({
         setNextImageIndex(null);
         // Start from center and gradually move to new direction
         setCurrentPanPosition({ x: 0, y: 0 });
-        setPanDirection(selectRandomDirection());
         setIsTransitioning(false);
 
         // Gradually move to the target position over 10 seconds
@@ -386,7 +385,6 @@ export default function Hero({
           setNextImageIndex(null);
           // Start from center and gradually move to new direction
           setCurrentPanPosition({ x: 0, y: 0 });
-          setPanDirection(selectRandomDirection());
           setIsTransitioning(false);
 
           // Gradually move to the target position over 10 seconds

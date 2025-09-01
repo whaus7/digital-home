@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+
 import { ArrowRight, Star, Home, Speaker, Lightbulb } from "lucide-react";
 
 export default function HomeHero() {
