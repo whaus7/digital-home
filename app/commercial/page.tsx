@@ -5,13 +5,10 @@ import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import {
   Building2,
-  Monitor,
   Users,
   Lightbulb,
   Sun,
   ArrowRight,
-  Wifi,
-  Shield,
   Video,
   Settings,
 } from "lucide-react";
@@ -27,7 +24,7 @@ const commercialServices = [
       "Seamlessly control lights, security, shades and AV",
       "Facilitate opening and closing tasks with pre-saved settings",
       "Occupancy sensors turn off lights and AV in unoccupied rooms",
-      "Maintaining connectivity to the Internet is critical in today's businesses",
+      "Maintaining connectivity to the Internet is critical in today&apos;s businesses",
       "Our IP products continuously monitor connectivity and automatically reboot troubled devices when the connection is lost",
     ],
     color: "blue",
@@ -36,7 +33,7 @@ const commercialServices = [
     icon: Settings,
     title: "Integrated Room Control",
     description:
-      "Refined Control Transforms Your Company's Most Important Rooms",
+      "Refined Control Transforms Your Company&apos;s Most Important Rooms",
     features: [
       "Operate all the technology from the device of your choice",
       "Design the ideal environment for meetings and presentations",
@@ -229,8 +226,8 @@ export default function CommercialPage() {
               Schedule a Consultation
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Reserve a free, no-obligation consultation with us. We'll contact
-              you shortly.
+              Reserve a free, no-obligation consultation with us. We&apos;ll
+              contact you shortly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
