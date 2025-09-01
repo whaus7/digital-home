@@ -289,8 +289,9 @@ const serviceData = {
   },
 };
 
-export default function ServicePage({ params }: { params: { slug: string } }) {
-  const service = serviceData[params.slug as keyof typeof serviceData];
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const service = serviceData[slug as keyof typeof serviceData];
 
   if (!service) {
     notFound();
