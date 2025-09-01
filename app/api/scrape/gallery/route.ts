@@ -38,7 +38,7 @@ export async function GET() {
     }> = [];
 
     // Look for images in various selectors that might contain gallery images
-    $("img").each((index: number, element: any) => {
+    $("img").each((index: number, element: cheerio.Element) => {
       const $img = $(element);
       const src = $img.attr("src");
       const alt = $img.attr("alt") || "";

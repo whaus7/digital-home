@@ -77,10 +77,10 @@ export default function GalleryGrid({
     setSelectedImageIndex(index);
   };
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setSelectedImage(null);
     setSelectedImageIndex(0);
-  };
+  }, []);
 
   const goToNextImage = useCallback(() => {
     const nextIndex = (selectedImageIndex + 1) % images.length;
