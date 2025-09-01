@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Image, Loader2, AlertCircle } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Image as LucideImage, Loader2, AlertCircle } from "lucide-react";
+import Image from "next/image";
 
 interface GalleryImage {
   src: string;
@@ -66,7 +67,7 @@ export default function GalleryGrid({
     };
   }, [selectedImage, selectedImageIndex, images]);
 
-  const fetchGalleryImages = async () => {
+  const fetchGalleryImages = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -94,7 +95,7 @@ export default function GalleryGrid({
     } finally {
       setLoading(false);
     }
-  };
+  }, [category, currentLimit]);
 
   const handleImageClick = (image: GalleryImage, index: number) => {
     setSelectedImage(image);
@@ -106,18 +107,18 @@ export default function GalleryGrid({
     setSelectedImageIndex(0);
   };
 
-  const goToNextImage = () => {
+  const goToNextImage = useCallback(() => {
     const nextIndex = (selectedImageIndex + 1) % images.length;
     setSelectedImage(images[nextIndex]);
     setSelectedImageIndex(nextIndex);
-  };
+  }, [selectedImageIndex, images]);
 
-  const goToPreviousImage = () => {
+  const goToPreviousImage = useCallback(() => {
     const prevIndex =
       selectedImageIndex === 0 ? images.length - 1 : selectedImageIndex - 1;
     setSelectedImage(images[prevIndex]);
     setSelectedImageIndex(prevIndex);
-  };
+  }, [selectedImageIndex, images]);
 
   const loadMore = () => {
     setCurrentLimit((prev) => prev + limit);
@@ -154,7 +155,7 @@ export default function GalleryGrid({
   if (images.length === 0) {
     return (
       <div className="text-center py-12">
-        <Image className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+        <LucideImage className="w-16 h-16 text-gray-400 mx-auto mb-4" />
         <p className="text-gray-600">No images found for this category.</p>
       </div>
     );
@@ -170,12 +171,12 @@ export default function GalleryGrid({
             onClick={() => handleImageClick(image, index)}
           >
             <div className="aspect-square bg-gray-100 relative overflow-hidden min-h-[200px]">
-              <img
+              <Image
                 src={image.src}
                 alt={image.alt || "Gallery image"}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-                onLoad={(e) => {
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
+                onLoad={() => {
                   setLoadedImages((prev) => new Set(prev).add(image.src));
                 }}
                 onError={(e) => {
@@ -189,7 +190,7 @@ export default function GalleryGrid({
               {/* Fallback placeholder */}
               <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 hidden">
                 <div className="text-center">
-                  <Image className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                  <LucideImage className="w-12 h-12 text-gray-400 mx-auto mb-2" />
                   <span className="text-sm text-gray-500 font-medium">
                     Image Preview
                   </span>
@@ -202,7 +203,7 @@ export default function GalleryGrid({
               {/* Error placeholder */}
               <div className="absolute inset-0 flex items-center justify-center bg-gray-200 hidden">
                 <div className="text-center">
-                  <Image className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <LucideImage className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                   <span className="text-sm text-gray-500">
                     Image unavailable
                   </span>
@@ -235,7 +236,7 @@ export default function GalleryGrid({
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="bg-white rounded-full p-2 shadow-lg">
-                  <Image className="w-5 h-5 text-gray-700" />
+                  <LucideImage className="w-5 h-5 text-gray-700" />
                 </div>
               </div>
             </div>
@@ -322,9 +323,11 @@ export default function GalleryGrid({
             )}
 
             {/* Main Image */}
-            <img
+            <Image
               src={selectedImage.src}
               alt={selectedImage.alt || "Gallery image"}
+              width={800}
+              height={600}
               className="max-w-full max-h-full object-contain rounded-lg"
             />
 
@@ -372,9 +375,11 @@ export default function GalleryGrid({
                           : "border-gray-300 hover:border-purple-400"
                       }`}
                     >
-                      <img
+                      <Image
                         src={img.src}
                         alt={img.alt || "Thumbnail"}
+                        width={64}
+                        height={64}
                         className="w-full h-full object-cover"
                       />
                     </button>

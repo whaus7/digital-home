@@ -2,6 +2,7 @@
 
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const testimonials = [
   {
@@ -83,8 +84,8 @@ export default function Testimonials() {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-300">
-              Trust is the cornerstone of any successful relationship, and we're
-              committed to earning yours by always delivering stellar
+              Trust is the cornerstone of any successful relationship, and
+              we&apos;re committed to earning yours by always delivering stellar
               installations and quality customer support.
             </p>
           </div>
@@ -168,10 +169,11 @@ export default function Testimonials() {
 
       {/* Right Section - Background Image */}
       <div className="hidden lg:block lg:w-1/2">
-        <img
+        <Image
           src="/images/LZ-Living-Room.jpg"
           alt="Living Room Home Automation"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
         />
       </div>
     </section>

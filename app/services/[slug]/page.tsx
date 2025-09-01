@@ -17,7 +17,8 @@ const serviceData = {
     sections: [
       {
         title: "Integrated Systems",
-        subtitle: "Sophisticated Pure Control of All Your Home's Technology",
+        subtitle:
+          "Sophisticated Pure Control of All Your Home&apos;s Technology",
         features: [
           "Cutting-edge management from touchpads, mobile apps or voice assistants",
           "Integrate elegant keypads that manage your whole home with one convenient touch",
@@ -40,17 +41,17 @@ const serviceData = {
           "High-Precision Control of Shades Provides Exceptional Style and Privacy",
         features: [
           "Choose from a variety of high-end design, fabric and color options",
-          "Effortlessly close all shades to protect your family's privacy",
+          "Effortlessly close all shades to protect your family&apos;s privacy",
           "Manage natural light to preserve delicate furnishings and artwork",
         ],
       },
       {
         title: "Smart Home Control",
         subtitle:
-          "Flawless Command of Your Home's Lighting, Entertainment, Climate and Security",
+          "Flawless Command of Your Home&apos;s Lighting, Entertainment, Climate and Security",
         features: [
           "Manage your luxury home with one tap from the device of your choice",
-          "Cultivate the ideal environment for relaxation, hosting parties or children's homework",
+          "Cultivate the ideal environment for relaxation, hosting parties or children&apos;s homework",
           "Remotely access lights, security and surveillance from around the world",
         ],
       },
@@ -59,15 +60,15 @@ const serviceData = {
         subtitle:
           "Wellness starts at home with our Circadian Rhythm lighting systems",
         features: [
-          "Allow your home's lighting to replicate both sunlight and firelight, humanity's source of life, and feel seamlessly connected to nature within your home",
-          "Automated changes mimic the sun's intensity and hues throughout the day",
-          "Generate relaxation or focus by adjusting your fixtures' color temperatures",
+          "Allow your home&apos;s lighting to replicate both sunlight and firelight, humanity&apos;s source of life, and feel seamlessly connected to nature within your home",
+          "Automated changes mimic the sun&apos;s intensity and hues throughout the day",
+          "Generate relaxation or focus by adjusting your fixtures&apos; color temperatures",
         ],
       },
       {
         title: "Energy Integration",
         subtitle:
-          "Innovative Energy Management Ensures You're Never in the Dark",
+          "Innovative Energy Management Ensures You&apos;re Never in the Dark",
         features: [
           "Unmatched energy security even during severe weather events",
           "Ensure your home receives clean energy at all times",

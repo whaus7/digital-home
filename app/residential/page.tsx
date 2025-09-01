@@ -9,7 +9,6 @@ import {
   Lightbulb,
   Users,
   Monitor,
-  TreePine,
   Sun,
   ArrowRight,
 } from "lucide-react";

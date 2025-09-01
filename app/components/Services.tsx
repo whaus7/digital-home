@@ -7,7 +7,6 @@ import {
   Lightbulb,
   Users,
   Monitor,
-  TreePine,
 } from "lucide-react";
 
 const services = [
