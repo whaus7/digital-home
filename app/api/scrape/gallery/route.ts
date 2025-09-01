@@ -38,7 +38,7 @@ export async function GET() {
     }> = [];
 
     // Look for images in various selectors that might contain gallery images
-    $("img").each((index: number, element: cheerio.Element) => {
+    $("img").each((index: number, element: any) => {
       const $img = $(element);
       const src = $img.attr("src");
       const alt = $img.attr("alt") || "";
@@ -129,7 +129,7 @@ export async function GET() {
 
     // Also look for background images in CSS
     $('[style*="background"]').each(
-      (index: number, element: cheerio.Element) => {
+      (index: number, element: any) => {
         const $el = $(element);
         const style = $el.attr("style") || "";
         const backgroundMatch = style.match(
