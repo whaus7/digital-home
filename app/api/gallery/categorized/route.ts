@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
+// Define proper types for image metadata
+interface ImageMetadata {
+  src: string;
+  alt: string;
+  title: string;
+  category: string;
+}
+
 // Categorized images from Hero component
 const categorizedImages = {
   residential: [
@@ -101,7 +109,10 @@ const categorizedImages = {
 };
 
 // Helper function to generate image metadata
-const generateImageMetadata = (src: string, category: string) => {
+const generateImageMetadata = (
+  src: string,
+  category: string
+): ImageMetadata => {
   const filename =
     src
       .split("/")
@@ -180,7 +191,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
 
-    let allImages: any[] = [];
+    let allImages: ImageMetadata[] = [];
 
     // If a specific category is requested, only return those images
     if (
