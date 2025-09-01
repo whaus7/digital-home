@@ -65,7 +65,7 @@ export default function Testimonials() {
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+      prevIndex === 0 ? testimonials.length - 1 : prevIndex + 1
     );
   };
 
@@ -107,7 +107,7 @@ export default function Testimonials() {
               </div>
 
               <blockquote className="text-gray-200 mb-8 leading-relaxed text-lg italic">
-                "{testimonials[currentIndex].content}"
+                &ldquo;{testimonials[currentIndex].content}&rdquo;
               </blockquote>
 
               <footer className="text-lg font-semibold text-white">
@@ -168,12 +168,14 @@ export default function Testimonials() {
       </div>
 
       {/* Right Section - Background Image */}
-      <div className="hidden lg:block lg:w-1/2">
+      <div className="hidden lg:block lg:w-1/2 relative overflow-hidden">
         <Image
           src="/images/LZ-Living-Room.jpg"
           alt="Living Room Home Automation"
-          fill
-          className="object-cover"
+          width={800}
+          height={600}
+          className="object-cover w-full h-full"
+          priority
         />
       </div>
     </section>

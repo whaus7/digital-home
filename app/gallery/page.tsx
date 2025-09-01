@@ -7,14 +7,7 @@ import Footer from "../components/Footer";
 import GalleryGrid from "../components/GalleryGrid";
 import Hero from "../components/Hero";
 
-import {
-  Image,
-  Home,
-  Building2,
-  Lightbulb,
-  Users,
-  Monitor,
-} from "lucide-react";
+import { Image, Home, Building2, Lightbulb, Users } from "lucide-react";
 
 const galleryCategories = [
   {

@@ -31,41 +31,11 @@ export default function GalleryGrid({
   const [currentLimit, setCurrentLimit] = useState(limit);
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
-  useEffect(() => {
-    fetchGalleryImages();
-  }, [category, currentLimit]);
-
   // Reset limit when category changes
   useEffect(() => {
     setCurrentLimit(limit);
     setLoadedImages(new Set()); // Reset loaded images when category changes
   }, [category, limit]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!selectedImage) return;
-
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        goToNextImage();
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        goToPreviousImage();
-      } else if (e.key === "Escape") {
-        e.preventDefault();
-        closeModal();
-      }
-    };
-
-    if (selectedImage) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedImage, selectedImageIndex, images]);
 
   const fetchGalleryImages = useCallback(async () => {
     try {
@@ -97,6 +67,11 @@ export default function GalleryGrid({
     }
   }, [category, currentLimit]);
 
+  // Fetch images when component mounts or dependencies change
+  useEffect(() => {
+    fetchGalleryImages();
+  }, [fetchGalleryImages]);
+
   const handleImageClick = (image: GalleryImage, index: number) => {
     setSelectedImage(image);
     setSelectedImageIndex(index);
@@ -123,6 +98,39 @@ export default function GalleryGrid({
   const loadMore = () => {
     setCurrentLimit((prev) => prev + limit);
   };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!selectedImage) return;
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        goToNextImage();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        goToPreviousImage();
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        closeModal();
+      }
+    };
+
+    if (selectedImage) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [
+    selectedImage,
+    selectedImageIndex,
+    images,
+    goToNextImage,
+    goToPreviousImage,
+    closeModal,
+  ]);
 
   if (loading) {
     return (

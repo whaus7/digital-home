@@ -143,11 +143,11 @@ export default function HomeHero() {
                   <div className="text-sm text-gray-600">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">1000+</div>
+                  <div className="text-xl font-bold text-blue-600">1000+</div>
                   <div className="text-sm text-gray-600">Happy Clients</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">24/7</div>
+                  <div className="text-xl font-bold text-blue-600">24/7</div>
                   <div className="text-sm text-gray-600">DHTcare Support</div>
                 </div>
               </div>
