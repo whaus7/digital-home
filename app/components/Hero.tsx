@@ -294,39 +294,71 @@ export default function Hero({
     null
   ); // Start with null to prevent initial render
   const [isTransitioning, setIsTransitioning] = useState(false);
-
   const [currentPanPosition, setCurrentPanPosition] = useState({ x: 0, y: 0 });
   const [nextImageIndex, setNextImageIndex] = useState<number | null>(null);
+  const [transitionOpacity, setTransitionOpacity] = useState(0); // New state for smooth cross-fade
   const currentImageIndexRef = useRef(0); // Ref to track current index for interval
+  const previousPathnameRef = useRef<string>(""); // Track previous pathname to detect navigation
 
-  // Handle pathname changes and initial setup
+  // Handle pathname changes and initial setup - with smoother transitions
   useEffect(() => {
     if (availableImages.length > 0) {
       const newImageIndex = getImageIndexFromPath(pathname, availableImages);
-      setIsTransitioning(true);
-      setNextImageIndex(newImageIndex);
 
-      setTimeout(() => {
+      // Check if this is a navigation change or initial load
+      const isNavigation =
+        previousPathnameRef.current !== "" &&
+        previousPathnameRef.current !== pathname;
+
+      if (isNavigation) {
+        // For navigation changes, do a smoother transition
+        console.log("Navigation detected, doing smooth transition");
+        setIsTransitioning(true);
+        setNextImageIndex(newImageIndex);
+        setTransitionOpacity(0);
+
+        // Shorter transition for navigation
+        setTimeout(() => {
+          setCurrentImageIndex(newImageIndex);
+          currentImageIndexRef.current = newImageIndex;
+          setNextImageIndex(null);
+          setTransitionOpacity(1);
+          // Keep current pan position for smoother feel
+          setIsTransitioning(false);
+
+          // Gradually adjust to new direction if needed
+          setTimeout(() => {
+            const newDirection = selectRandomDirection();
+            setCurrentPanPosition(newDirection);
+          }, 200);
+        }, 150); // Faster transition for navigation
+      } else {
+        // Initial load - set up normally
+        console.log("Initial load, setting up normally");
         setCurrentImageIndex(newImageIndex);
-        currentImageIndexRef.current = newImageIndex; // Update ref
-        setNextImageIndex(null);
-        // Start from center and gradually move to new direction
+        currentImageIndexRef.current = newImageIndex;
         setCurrentPanPosition({ x: 0, y: 0 });
-        setIsTransitioning(false);
+        setTransitionOpacity(1);
 
-        // Gradually move to the target position over 10 seconds
+        // Start animation after a brief delay
         setTimeout(() => {
           setCurrentPanPosition(selectRandomDirection());
         }, 500);
-      }, 300);
+      }
+
+      // Update previous pathname
+      previousPathnameRef.current = pathname;
     }
   }, [pathname, availableImages]); // Only depend on pathname and availableImages
 
   // Set up interval for image transitions (only when staying on same page)
   useEffect(() => {
     // Only set up interval if we have images and we're not transitioning
-    if (availableImages.length > 0) {
+    if (availableImages.length > 0 && currentImageIndex !== null) {
       const interval = setInterval(() => {
+        // Don't transition if we're already transitioning
+        if (isTransitioning) return;
+
         setIsTransitioning(true);
 
         // After fade out, change image and fade in
@@ -380,26 +412,34 @@ export default function Hero({
           const nextIndex = availableImages.indexOf(nextImage);
 
           setNextImageIndex(nextIndex);
-          setCurrentImageIndex(nextIndex);
-          currentImageIndexRef.current = nextIndex; // Update ref
-          setNextImageIndex(null);
-          // Start from center and gradually move to new direction
-          setCurrentPanPosition({ x: 0, y: 0 });
-          setIsTransitioning(false);
+          setTransitionOpacity(0);
 
-          // Gradually move to the target position over 10 seconds
+          // Smooth cross-fade transition
           setTimeout(() => {
-            setCurrentPanPosition(selectRandomDirection());
-          }, 500);
-        }, 500); // Half second fade out
-      }, 10000); // 15 seconds per image
+            setCurrentImageIndex(nextIndex);
+            currentImageIndexRef.current = nextIndex; // Update ref
+            setNextImageIndex(null);
+            setTransitionOpacity(1);
+            // Start from center and gradually move to new direction
+            setCurrentPanPosition({ x: 0, y: 0 });
+            setIsTransitioning(false);
+
+            // Gradually move to the target position over 10 seconds
+            setTimeout(() => {
+              setCurrentPanPosition(selectRandomDirection());
+            }, 500);
+          }, 300); // Cross-fade duration
+        }, 300); // Reduced fade out time for smoother transition
+      }, 10000); // 10 seconds per image
 
       return () => clearInterval(interval);
     }
-  }, [pathname, availableImages]); // Depend on pathname and availableImages
+  }, [pathname, availableImages, currentImageIndex, isTransitioning]); // Added currentImageIndex and isTransitioning dependencies
 
   const selectedImage =
     currentImageIndex !== null ? availableImages[currentImageIndex] : null;
+  const nextImage =
+    nextImageIndex !== null ? availableImages[nextImageIndex] : null;
 
   // Preload next image to prevent visual glitches
   useEffect(() => {
@@ -428,9 +468,7 @@ export default function Hero({
       <div className="lg:hidden">
         {/* Background Image with Animation */}
         <div
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-300 ease-in-out ${
-            isTransitioning ? "opacity-0" : "opacity-100"
-          }`}
+          className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${selectedImage})`,
             backgroundSize: "cover",
@@ -446,6 +484,28 @@ export default function Hero({
           {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-black/20"></div>
         </div>
+
+        {/* Next Image Layer (for cross-fade) */}
+        {nextImage && isTransitioning && (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${nextImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              transformOrigin: "center",
+              transform: `scale(1.25) translate(${
+                currentPanPosition.x * 69
+              }px, ${currentPanPosition.y * 69}px)`,
+              transition: "transform 9s ease-in-out",
+              opacity: 1 - transitionOpacity,
+            }}
+          >
+            {/* Overlay for better text readability */}
+            <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+        )}
 
         {/* Content Container */}
         <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -501,15 +561,18 @@ export default function Hero({
 
         {/* Angled Border Separator */}
         <div className="w-0 relative z-10">
-          <div className="w-20 h-full bg-white transform skew-x-8 -translate-x-10 shadow-lg"></div>
+          <div
+            className="w-20 h-full bg-white shadow-lg"
+            style={{
+              transform: "skewX(6deg) translateX(-2.8rem)",
+            }}
+          ></div>
         </div>
 
         {/* Left Section - Panning Image (60%) */}
         <div className="w-[60%] relative overflow-hidden">
           <div
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-300 ease-in-out ${
-              isTransitioning ? "opacity-0" : "opacity-100"
-            }`}
+            className="absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${selectedImage})`,
               backgroundSize: "cover",
@@ -525,6 +588,28 @@ export default function Hero({
             {/* Overlay for better text readability */}
             <div className="absolute inset-0 bg-black/20"></div>
           </div>
+
+          {/* Next Image Layer (for cross-fade) */}
+          {nextImage && isTransitioning && (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: `url(${nextImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+                transformOrigin: "center",
+                transform: `scale(1.25) translate(${
+                  currentPanPosition.x * 69
+                }px, ${currentPanPosition.y * 69}px)`,
+                transition: "transform 9s ease-in-out",
+                opacity: 1 - transitionOpacity,
+              }}
+            >
+              {/* Overlay for better text readability */}
+              <div className="absolute inset-0 bg-black/20"></div>
+            </div>
+          )}
         </div>
       </div>
     </section>
