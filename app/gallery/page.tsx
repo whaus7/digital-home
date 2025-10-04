@@ -6,6 +6,7 @@ import MobileHeader from "../components/MobileHeader";
 import Footer from "../components/Footer";
 import GalleryGrid from "../components/GalleryGrid";
 import Hero from "../components/Hero";
+import { Suspense } from "react";
 
 import { Image, Home, Building2, Lightbulb, Users } from "lucide-react";
 
@@ -58,7 +59,7 @@ const galleryCategories = [
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function GalleryPage() {
+function GalleryContent() {
   const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [categoryCounts, setCategoryCounts] = useState<{
@@ -222,5 +223,36 @@ export default function GalleryPage() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function GalleryPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen">
+          <DesktopNav />
+          <MobileHeader />
+          <MobileNav />
+          <main className="pb-20 md:pb-0">
+            <Hero
+              title="Our Project Gallery"
+              subtitle="Explore our portfolio of completed smart home and commercial technology installations. Each project showcases our commitment to quality, innovation, and customer satisfaction."
+              showCta={false}
+            />
+            <div className="py-16 md:py-24">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex justify-center items-center py-12">
+                  <div className="w-8 h-8 border-4 border-gray-300 border-t-purple-600 rounded-full animate-spin"></div>
+                </div>
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      }
+    >
+      <GalleryContent />
+    </Suspense>
   );
 }
