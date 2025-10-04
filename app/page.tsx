@@ -3,6 +3,7 @@ import MobileNav from "./components/MobileNav";
 import MobileHeader from "./components/MobileHeader";
 import HomeHero from "./components/HomeHero";
 import Services from "./components/Services";
+import GalleryPreview from "./components/GalleryPreview";
 import Partners from "./components/Partners";
 import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
@@ -17,6 +18,7 @@ export default function Home() {
       <main className="pb-20 md:pb-0">
         <HomeHero />
         <Services />
+        <GalleryPreview />
         <Testimonials />
         <Partners />
       </main>

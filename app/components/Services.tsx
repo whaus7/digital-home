@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Home,
   Building2,
@@ -17,6 +18,7 @@ const services = [
       "Complete home automation systems that make your life easier and more enjoyable.",
     href: "/services/smart-home-integration",
     color: "blue",
+    image: "/images/LZ-Living-Room.jpg",
   },
   {
     icon: Building2,
@@ -25,6 +27,7 @@ const services = [
       "Professional automation and technology solutions for businesses and commercial properties.",
     href: "/commercial",
     color: "green",
+    image: "/images/goldenne-shep-office-NYSE-FINAL-web-copy.jpg",
   },
   {
     icon: Wifi,
@@ -33,6 +36,7 @@ const services = [
       "Reliable, high-speed internet and network infrastructure for your home or business.",
     href: "/services/wifi-networking",
     color: "purple",
+    image: "/images/LZ-Bath-Touchpanel.jpg",
   },
   {
     icon: Sun,
@@ -41,6 +45,7 @@ const services = [
       "Transform your outdoor spaces with smart lighting, audio, and entertainment systems.",
     href: "/services/outdoor-living",
     color: "orange",
+    image: "/images/Bar-Pool.jpg",
   },
   {
     icon: Lightbulb,
@@ -49,6 +54,7 @@ const services = [
       "Intelligent lighting control and motorized shades for comfort and energy efficiency.",
     href: "/services/lighting-shades",
     color: "yellow",
+    image: "/images/Highland-Park-Sun-Room-Light.jpg",
   },
   {
     icon: Users,
@@ -57,6 +63,7 @@ const services = [
       "Theater-quality sound and video systems throughout your home.",
     href: "/services/audio-video",
     color: "red",
+    image: "/images/Barrington-Theater-Chairs.jpg",
   },
   {
     icon: Monitor,
@@ -64,6 +71,7 @@ const services = [
     description: "Comprehensive monitoring solutions for peace of mind.",
     href: "/services/monitoring-security",
     color: "indigo",
+    image: "/images/LZ-Bath-Touchpanel.jpg",
   },
 ];
 
@@ -80,7 +88,7 @@ const colorClasses = {
 
 export default function Services() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -93,7 +101,7 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {services.map((service) => {
             const Icon = service.icon;
             const colorClass =
@@ -103,21 +111,36 @@ export default function Services() {
               <Link
                 key={service.title}
                 href={service.href}
-                className="group block p-6 bg-white border border-gray-200 rounded-xl hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className="group block bg-white border border-gray-200 rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
               >
-                <div
-                  className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 transition-colors ${colorClass}`}
-                >
-                  <Icon size={24} />
+                {/* Image Section */}
+                <div className="relative h-48 md:h-48 sm:h-80 overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {service.title}
-                </h3>
+                {/* Content Section */}
+                <div className="p-6">
+                  <div className="flex items-center mb-3">
+                    <div
+                      className={`w-12 h-12 rounded-lg flex items-center justify-center mr-4 ${colorClass}`}
+                    >
+                      <Icon size={24} />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                      {service.title}
+                    </h3>
+                  </div>
 
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {service.description}
-                </p>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
               </Link>
             );
           })}

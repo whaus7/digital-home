@@ -4,27 +4,23 @@ import { ArrowRight, Star, Home, Speaker, Lightbulb } from "lucide-react";
 
 export default function HomeHero() {
   return (
-    <section className="relative h-[78vh] lg:h-[65vh] overflow-hidden">
+    <section className="relative min-h-screen lg:h-[65vh] overflow-hidden">
       {/* Mobile Layout */}
-      <div className="lg:hidden">
+      <div className="lg:hidden flex flex-col">
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="h-[50vh] bg-cover bg-center relative"
           style={{
             backgroundImage: `url(/images/Nelson-Pool.jpg)`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
           }}
-        >
-          {/* Overlay for better text readability */}
-          <div className="absolute inset-0 bg-black/20"></div>
-        </div>
+        ></div>
 
-        {/* Content Container */}
-        <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          {/* Content Box */}
-          <div className="bg-black/55 backdrop-blur-sm rounded-xl shadow-xl p-4 md:p-6 max-w-xl">
+        {/* Content Container - Below Image */}
+        <div className="bg-black/90 backdrop-blur-sm p-6 flex-1 flex items-center justify-center">
+          <div className="max-w-xl w-full">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <div className="flex">
@@ -51,14 +47,6 @@ export default function HomeHero() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                {/* <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Schedule Consultation
-                  <ArrowRight size={20} className="ml-2" />
-                </Link> */}
-
                 <Link
                   href="/residential"
                   className="inline-flex items-center justify-center px-6 py-3 border-2 border-gray-300 text-gray-200 font-semibold rounded-lg hover:border-blue-400 hover:text-blue-400 transition-colors"
@@ -66,21 +54,6 @@ export default function HomeHero() {
                   View Services
                 </Link>
               </div>
-
-              {/* <div className="grid grid-cols-3 gap-6 pt-4">
-                <div className="text-center">
-                  <div className="text-xl font-bold text-blue-400">40+</div>
-                  <div className="text-sm text-gray-300">Years Experience</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xl font-bold text-blue-400">1000+</div>
-                  <div className="text-sm text-gray-300">Happy Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xl font-bold text-blue-400">24/7</div>
-                  <div className="text-sm text-gray-300">DHTcare Support</div>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

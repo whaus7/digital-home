@@ -56,16 +56,24 @@ const galleryCategories = [
 ];
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function GalleryPage() {
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [categoryCounts, setCategoryCounts] = useState<{
     [key: string]: number;
   }>({});
   const [loading, setLoading] = useState(true);
 
-  // Fetch category counts on component mount
+  // Handle URL parameters and fetch category counts
   useEffect(() => {
+    // Check for category parameter in URL
+    const categoryParam = searchParams.get("category");
+    if (categoryParam && categoryParam !== selectedCategory) {
+      setSelectedCategory(categoryParam);
+    }
+
     const fetchCategoryCounts = async () => {
       try {
         const response = await fetch("/api/gallery/categorized");
@@ -94,7 +102,7 @@ export default function GalleryPage() {
     };
 
     fetchCategoryCounts();
-  }, []);
+  }, [searchParams, selectedCategory]);
 
   return (
     <div className="min-h-screen">
