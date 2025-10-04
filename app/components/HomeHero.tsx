@@ -41,8 +41,8 @@ export default function HomeHero() {
               </h1>
 
               <p className="text-lg text-gray-200 leading-relaxed">
-                You spend half of your life in your house. We're here to help
-                design your perfect sactuary.
+                You spend half of your life in your house. We&apos;re here to
+                help design your perfect sactuary.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -86,8 +86,8 @@ export default function HomeHero() {
                 </h1>
 
                 <p className="text-xl text-gray-600 leading-relaxed">
-                  You spend half of your life in your house. We're here to help
-                  design your perfect sactuary.
+                  You spend half of your life in your house. We&apos;re here to
+                  help design your perfect sactuary.
                 </p>
               </div>
 
