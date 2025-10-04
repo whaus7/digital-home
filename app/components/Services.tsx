@@ -88,7 +88,7 @@ const colorClasses = {
 
 export default function Services() {
   return (
-    <section className="md:py-24 bg-white">
+    <section className="py-12 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -114,7 +114,7 @@ export default function Services() {
                 className="group block bg-white border border-gray-200 rounded-xl hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden"
               >
                 {/* Image Section */}
-                <div className="relative h-48 md:h-48 sm:h-80 overflow-hidden">
+                <div className="relative h-72 md:h-48 sm:h-80 overflow-hidden">
                   <Image
                     src={service.image}
                     alt={service.title}
