@@ -96,8 +96,7 @@ export default function Services() {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We intelligently design and expertly install systems to enhance your
-            home experience. Our dedicated DHTcare team works tirelessly to
-            ensure your home will always meet and exceed your expectations.
+            home experience.
           </p>
         </div>
 

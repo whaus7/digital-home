@@ -49,8 +49,7 @@ export default function GalleryPreview() {
             Our Work
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-            Explore our portfolio of completed projects showcasing the latest in
-            smart home technology and design.
+            Explore our portfolio of recent smart home integrations
           </p>
           <Link
             href="/gallery"

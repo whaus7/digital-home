@@ -83,11 +83,11 @@ export default function Testimonials() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               What Our Clients Say
             </h2>
-            <p className="text-xl text-gray-300">
+            {/* <p className="text-xl text-gray-300">
               Trust is the cornerstone of any successful relationship, and
               we&apos;re committed to earning yours by always delivering stellar
               installations and quality customer support.
-            </p>
+            </p> */}
           </div>
 
           {/* Slideshow Container */}
