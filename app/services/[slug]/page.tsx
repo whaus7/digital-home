@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import DesktopNav from "../../components/DesktopNav";
 import MobileNav from "../../components/MobileNav";
 import MobileHeader from "../../components/MobileHeader";
@@ -17,6 +18,7 @@ const serviceData = {
     sections: [
       {
         title: "Integrated Systems",
+        image: "/images/LZ-Living-Room.jpg",
         subtitle:
           "Sophisticated Pure Control of All Your Home&apos;s Technology",
         features: [
@@ -27,6 +29,8 @@ const serviceData = {
       },
       {
         title: "Lighting Control",
+        image:
+          "/images/kitchen-FINAL-FOR-WEB-goldenne-ohel-long-grove-aug2013_J4.jpg",
         subtitle:
           "Craft the Light in Your Home to Improve Productivity, Relaxation and Security",
         features: [
@@ -37,6 +41,7 @@ const serviceData = {
       },
       {
         title: "Motorized Window Treatments",
+        image: "/images/Highland-Park-Sun-Room-no-light.jpg",
         subtitle:
           "High-Precision Control of Shades Provides Exceptional Style and Privacy",
         features: [
@@ -47,6 +52,7 @@ const serviceData = {
       },
       {
         title: "Smart Home Control",
+        image: "/images/dht-pater-family-room.jpg",
         subtitle:
           "Flawless Command of Your Home&apos;s Lighting, Entertainment, Climate and Security",
         features: [
@@ -57,6 +63,7 @@ const serviceData = {
       },
       {
         title: "Wellness",
+        image: "/images/dht-pater-master-bedroom.jpg",
         subtitle:
           "Wellness starts at home with our Circadian Rhythm lighting systems",
         features: [
@@ -67,6 +74,7 @@ const serviceData = {
       },
       {
         title: "Energy Integration",
+        image: "/images/LZ-Bath-Touchpanel.jpg",
         subtitle:
           "Innovative Energy Management Ensures You&apos;re Never in the Dark",
         features: [
@@ -85,6 +93,7 @@ const serviceData = {
     sections: [
       {
         title: "Home Theater Systems",
+        image: "/images/Barrington-Theater-Chairs.jpg",
         subtitle: "Cinema-Quality Entertainment in Your Living Space",
         features: [
           "Professional-grade audio and video equipment installation",
@@ -94,6 +103,7 @@ const serviceData = {
       },
       {
         title: "Multi-Room Audio",
+        image: "/images/A-feast-for-the-eyes-and-ears-Living-Room-Bar.jpg",
         subtitle: "Music Throughout Your Home with Individual Control",
         features: [
           "Zone-based audio systems for different areas",
@@ -103,6 +113,7 @@ const serviceData = {
       },
       {
         title: "Video Distribution",
+        image: "/images/Wolfson-Theater.jpg",
         subtitle: "Share Content Across Multiple Displays",
         features: [
           "HD and 4K video distribution throughout your home",
@@ -190,6 +201,7 @@ const serviceData = {
     sections: [
       {
         title: "Smart Lighting Control",
+        image: "/images/LZ-Bath-Touchpanel.jpg",
         subtitle: "Transform Your Home with Intelligent Lighting",
         features: [
           "LED lighting design and installation",
@@ -199,6 +211,7 @@ const serviceData = {
       },
       {
         title: "Motorized Shades",
+        image: "/images/Highland-Park-Sun-Room-no-light.jpg",
         subtitle: "Automated Window Treatments for Comfort and Privacy",
         features: [
           "Custom motorized shade installation",
@@ -208,6 +221,7 @@ const serviceData = {
       },
       {
         title: "Circadian Lighting",
+        image: "/images/A-feast-for-the-eyes-and-ears-Bedroom.jpg",
         subtitle: "Natural Light Patterns for Health and Wellness",
         features: [
           "Automated color temperature adjustment",
@@ -289,7 +303,11 @@ const serviceData = {
   },
 };
 
-export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ServicePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const service = serviceData[slug as keyof typeof serviceData];
 
@@ -366,22 +384,34 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   <div
                     className={`${
                       index % 2 === 0 ? "order-2" : "order-1"
-                    } bg-gray-100 rounded-2xl h-64 lg:h-96 flex items-center justify-center`}
+                    } relative rounded-2xl h-64 lg:h-96 overflow-hidden bg-gray-100`}
                   >
-                    <div className="text-gray-400 text-center">
-                      <svg
-                        className="w-16 h-16 mx-auto mb-4"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                      <p>Service Image</p>
-                    </div>
+                    {"image" in section && section.image ? (
+                      <Image
+                        src={section.image}
+                        alt={section.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <div className="text-gray-400 text-center">
+                          <svg
+                            className="w-16 h-16 mx-auto mb-4"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <p>Service Image</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

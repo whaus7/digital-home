@@ -74,7 +74,10 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="min-h-screen flex bg-gray-900 overflow-hidden">
+    <section
+      id="reviews"
+      className="min-h-screen flex bg-gray-900 overflow-hidden"
+    >
       {/* Left Section - Testimonials Slideshow */}
       <div className="w-full lg:w-1/2 bg-gray-900 flex items-center justify-center p-8 lg:p-16">
         <div className="max-w-2xl w-full">

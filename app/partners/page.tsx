@@ -100,18 +100,20 @@ const partners = [
 
 const certifications = [
   {
-    title: "Control4 Certified",
-    description: "Certified Control4 dealer and installer",
+    title: "Nice ELAN Certified",
+    description: "Certified Nice ELAN dealer and installer",
     icon: Shield,
+    href: "https://www.niceforyou.com/na",
   },
   {
     title: "Lutron Certified",
     description: "Authorized Lutron dealer and certified installer",
     icon: Award,
+    href: "https://www.lutron.com/us/en",
   },
   {
-    title: "Sonos Certified",
-    description: "Certified Sonos dealer and installation partner",
+    title: "2GIG Certified",
+    description: "Certified Nice dealer and installation partner",
     icon: Users,
   },
   {
@@ -152,11 +154,8 @@ export default function PartnersPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {certifications.map((cert, index) => {
                 const Icon = cert.icon;
-                return (
-                  <div
-                    key={index}
-                    className="text-center p-6 bg-gray-50 rounded-xl"
-                  >
+                const content = (
+                  <>
                     <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Icon className="w-8 h-8 text-orange-600" />
                     </div>
@@ -164,6 +163,24 @@ export default function PartnersPage() {
                       {cert.title}
                     </h3>
                     <p className="text-gray-600 text-sm">{cert.description}</p>
+                  </>
+                );
+                return cert.href ? (
+                  <a
+                    key={index}
+                    href={cert.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-center p-6 bg-gray-50 rounded-xl hover:bg-orange-50 transition-colors block"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div
+                    key={index}
+                    className="text-center p-6 bg-gray-50 rounded-xl"
+                  >
+                    {content}
                   </div>
                 );
               })}

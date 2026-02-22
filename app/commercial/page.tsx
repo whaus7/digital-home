@@ -241,7 +241,7 @@ export default function CommercialPage() {
                 href="tel:847.776.5063"
                 className="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-green-600 hover:text-green-600 transition-colors"
               >
-                Call 847.776.5063
+                Text 847.776.5063
               </a>
             </div>
           </div>

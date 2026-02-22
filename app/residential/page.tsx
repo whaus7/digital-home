@@ -23,7 +23,7 @@ const residentialServices = [
       "Complete home automation systems that make your life easier and more enjoyable.",
     href: "/services/smart-home-integration",
     features: [
-      "Control4 home automation",
+      "Automated Exterior Shades",
       "Smart thermostats and HVAC control",
       "Automated door locks and garage doors",
       "Voice control integration",
@@ -92,11 +92,10 @@ const residentialServices = [
     href: "/services/outdoor-living",
     features: [
       "Outdoor audio systems",
-      "Landscape lighting",
+      "Security lighting",
       "Pool and spa automation",
       "Outdoor TV installations",
       "Weather-resistant controls",
-      "Security lighting",
     ],
     color: "orange",
   },
@@ -212,7 +211,7 @@ export default function ResidentialPage() {
                 href="tel:847.776.5063"
                 className="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors"
               >
-                Call 847.776.5063
+                Text 847.776.5063
               </a>
             </div>
           </div>

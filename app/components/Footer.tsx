@@ -1,19 +1,19 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 import Logo from "./Logo";
 
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <Logo showLink={false} className="text-white" />
             </div>
             <p className="text-gray-300 leading-relaxed">
-              Making Technology Simple since 1980. We intelligently design and
+              Making Technology Simple since 1987. We intelligently design and
               expertly install systems to enhance your home experience.
             </p>
             <div className="flex space-x-4">
@@ -90,12 +90,12 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">Contact</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400" />
+                <MessageCircle className="w-5 h-5 text-blue-400" />
                 <a
-                  href="tel:847.776.5063"
+                  href="sms:8477765063"
                   className="text-gray-300 hover:text-white transition-colors"
                 >
-                  847.776.5063
+                  Text us: 847.776.5063
                 </a>
               </div>
               <div className="flex items-center space-x-3">
@@ -106,29 +106,6 @@ export default function Footer() {
                 >
                   info@adigitalhome.com
                 </a>
-              </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-blue-400 mt-0.5" />
-                <address className="text-gray-300 not-italic">
-                  418 S Vermont
-                  <br />
-                  Palatine, IL 60067
-                </address>
-              </div>
-            </div>
-          </div>
-
-          {/* Hours */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Business Hours</h3>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-3">
-                <Clock className="w-5 h-5 text-blue-400" />
-                <div className="text-gray-300">
-                  <div>Mon-Fri: 8AM-6PM</div>
-                  <div>Sat: 9AM-4PM</div>
-                  <div>Sun: Closed</div>
-                </div>
               </div>
             </div>
             <div className="pt-4">
