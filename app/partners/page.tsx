@@ -13,6 +13,7 @@ const partners = [
     description:
       "Leading manufacturer of lighting control systems and motorized shades",
     logo: "/images/partners/lutron-logo.svg",
+    websiteUrl: "https://www.lutron.com/us/en",
     features: [
       "Smart Dimmers",
       "Motorized Shades",
@@ -26,6 +27,7 @@ const partners = [
     description:
       "Premium motorized window treatments for residential and commercial applications",
     logo: "/images/partners/lutron-logo.svg",
+    websiteUrl: "https://www.lutron.com/us/en/window-treatments/shades",
     features: [
       "Motorized Shades",
       "Smart Control",
@@ -39,6 +41,7 @@ const partners = [
     description:
       "World-renowned manufacturer of high-quality audio and video equipment",
     logo: "/images/partners/Sony_logo.svg.png",
+    websiteUrl: "https://electronics.sony.com/",
     features: [
       "4K Projectors",
       "Home Theater",
@@ -47,15 +50,17 @@ const partners = [
     ],
   },
   {
-    name: "Samsung",
-    category: "Display & Smart Home",
-    description: "Innovative display technology and smart home solutions",
-    logo: "/images/partners/samsung-logo.svg",
+    name: "ELAN by Nice",
+    category: "Control Systems",
+    description:
+      "ELAN control systems and Nice home automation solutions for whole-home connectivity.",
+    logo: "/images/partners/elan-nice-logo.png",
+    websiteUrl: "https://www.niceforyou.com/na",
     features: [
-      "QLED Displays",
-      "Smart TVs",
-      "Smart Home Hub",
-      "IoT Integration",
+      "ELAN OS Control",
+      "Smart Home Integration",
+      "Surveillance & Security",
+      "Whole-Home Automation",
     ],
   },
   {
@@ -64,6 +69,7 @@ const partners = [
     description:
       "Premium wireless audio systems for whole-home music enjoyment",
     logo: "/images/partners/sonos-logo.png",
+    websiteUrl: "https://www.sonos.com/en-us/home",
     features: [
       "Wireless Audio",
       "Multi-Room Music",
@@ -77,6 +83,7 @@ const partners = [
     description:
       "Heritage audio manufacturer known for exceptional sound quality",
     logo: "/images/partners/Klipsch_logo.svg",
+    websiteUrl: "https://www.klipsch.com/",
     features: [
       "Reference Speakers",
       "Home Theater",
@@ -89,6 +96,7 @@ const partners = [
     category: "Outdoor Audio",
     description: "Specialized outdoor audio and lighting solutions",
     logo: "/images/partners/coastal-source-logo.png",
+    websiteUrl: "https://coastalsource.com/",
     features: [
       "Outdoor Speakers",
       "Landscape Lighting",
@@ -203,49 +211,68 @@ export default function PartnersPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {partners.map((partner, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-lg transition-shadow"
-                >
-                  <div className="text-center mb-6">
-                    <div className="w-32 h-16 mx-auto mb-4 flex items-center justify-center">
-                      <Image
-                        src={partner.logo}
-                        alt={`${partner.name} logo`}
-                        width={128}
-                        height={64}
-                        className="max-w-full max-h-full object-contain"
-                      />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {partner.name}
-                    </h3>
-                    <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">
-                      {partner.category}
-                    </span>
-                  </div>
-
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {partner.description}
-                  </p>
-
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-900 mb-3">
-                      Key Products:
-                    </h4>
-                    {partner.features.map((feature, featureIndex) => (
-                      <div
-                        key={featureIndex}
-                        className="flex items-center space-x-2"
-                      >
-                        <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-                        <span className="text-sm text-gray-700">{feature}</span>
+              {partners.map((partner, index) => {
+                const cardContent = (
+                  <>
+                    <div className="text-center mb-6">
+                      <div className="w-32 h-16 mx-auto mb-4 flex items-center justify-center">
+                        <Image
+                          src={partner.logo}
+                          alt={`${partner.name} logo`}
+                          width={128}
+                          height={64}
+                          className="max-w-full max-h-full object-contain"
+                        />
                       </div>
-                    ))}
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                        {partner.name}
+                      </h3>
+                      <span className="inline-block px-3 py-1 bg-orange-100 text-orange-800 text-sm font-medium rounded-full">
+                        {partner.category}
+                      </span>
+                    </div>
+
+                    <p className="text-gray-600 mb-6 leading-relaxed">
+                      {partner.description}
+                    </p>
+
+                    <div className="space-y-2">
+                      <h4 className="font-semibold text-gray-900 mb-3">
+                        Key Products:
+                      </h4>
+                      {partner.features.map((feature, featureIndex) => (
+                        <div
+                          key={featureIndex}
+                          className="flex items-center space-x-2"
+                        >
+                          <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
+                          <span className="text-sm text-gray-700">
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                );
+                return partner.websiteUrl ? (
+                  <a
+                    key={index}
+                    href={partner.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-lg transition-shadow"
+                  >
+                    {cardContent}
+                  </a>
+                ) : (
+                  <div
+                    key={index}
+                    className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-lg transition-shadow"
+                  >
+                    {cardContent}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>

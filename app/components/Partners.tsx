@@ -26,7 +26,12 @@ export default function Partners() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 items-center">
-          <div className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300">
+          <a
+            href="https://coastalsource.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300"
+          >
             <Image
               src="/images/partners/coastal-source-logo.png"
               alt="Coastal Source"
@@ -34,8 +39,13 @@ export default function Partners() {
               height={60}
               className="max-h-12 w-auto object-contain"
             />
-          </div>
-          <div className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300">
+          </a>
+          <a
+            href="https://www.klipsch.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300"
+          >
             <Image
               src="/images/partners/Klipsch_logo.svg"
               alt="Klipsch"
@@ -43,8 +53,13 @@ export default function Partners() {
               height={60}
               className="max-h-12 w-auto object-contain"
             />
-          </div>
-          <div className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300">
+          </a>
+          <a
+            href="https://www.sonos.com/en-us/home"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300"
+          >
             <Image
               src="/images/partners/sonos-logo.png"
               alt="Sonos"
@@ -52,17 +67,27 @@ export default function Partners() {
               height={60}
               className="max-h-12 w-auto object-contain"
             />
-          </div>
-          <div className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300">
+          </a>
+          <a
+            href="https://www.niceforyou.com/na"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300"
+          >
             <Image
-              src="/images/partners/samsung-logo.svg"
-              alt="Samsung"
+              src="/images/partners/elan-nice-logo.png"
+              alt="ELAN by Nice"
               width={120}
               height={60}
               className="max-h-12 w-auto object-contain"
             />
-          </div>
-          <div className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300">
+          </a>
+          <a
+            href="https://electronics.sony.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300"
+          >
             <Image
               src="/images/partners/Sony_logo.svg.png"
               alt="Sony"
@@ -70,8 +95,13 @@ export default function Partners() {
               height={60}
               className="max-h-12 w-auto object-contain"
             />
-          </div>
-          <div className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300">
+          </a>
+          <a
+            href="https://www.lutron.com/us/en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300"
+          >
             <Image
               src="/images/partners/lutron-logo.svg"
               alt="Lutron"
@@ -79,7 +109,7 @@ export default function Partners() {
               height={60}
               className="max-h-12 w-auto object-contain"
             />
-          </div>
+          </a>
         </div>
       </div>
     </section>
